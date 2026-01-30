@@ -32,12 +32,12 @@ jobs:
             echo "new_version=true" >> $GITHUB_OUTPUT
           fi
 
-  build-and-release:
+build-and-release:
     needs: check-version
     if: needs.check-version.outputs.new_version == 'true'
     runs-on: ${{ matrix.os }}
     permissions:
-      contents: write
+      contents: write # Important!
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
@@ -63,53 +63,20 @@ jobs:
       - name: Build and Publish Electron
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # macOS Code Signing
+          # These allow electron-builder to upload to your GitHub Releases
           CSC_LINK: ${{ secrets.CSC_LINK }}
           CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
-          # macOS Notarization
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
-          # Clear empty secrets to prevent electron-builder from getting confused
+          # Cleanup secrets
           [ -z "$CSC_LINK" ] && unset CSC_LINK
           [ -z "$CSC_KEY_PASSWORD" ] && unset CSC_KEY_PASSWORD
-          [ -z "$APPLE_ID" ] && unset APPLE_ID
-          [ -z "$APPLE_ID_PASSWORD" ] && unset APPLE_ID_PASSWORD
-          [ -z "$APPLE_TEAM_ID" ] && unset APPLE_TEAM_ID
           
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            npm run electron:build -- --mac --publish always
+            npm run electron:build -- --mac -c.publish.provider=github
           else
-            npm run electron:build -- --win --publish always
+            npm run electron:build -- --win -c.publish.provider=github
           fi
         shell: bash
-
-  create-release-and-tag:
-    needs: [check-version, build-and-release]
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Generate Changelog
-        id: changelog
-        uses: mikepenz/release-changelog-builder-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Publish Release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ needs.check-version.outputs.version }}
-          name: Release v${{ needs.check-version.outputs.version }}
-          body: ${{ steps.changelog.outputs.changelog }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
