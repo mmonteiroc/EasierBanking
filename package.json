@@ -47,45 +47,26 @@
   "build": {
     "appId": "com.mmonteiroc.bankingviewer",
     "productName": "BankingViewer",
-    "asar": true,
     "directories": {
-      "output": "dist_electron",
-      "buildResources": "electron"
-    },
-    "files": [
-      "dist/**/*",
-      "electron/**/*",
-      "package.json"
-    ],
-    "mac": {
-      "category": "public.app-category.finance",
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "electron/entitlements.mac.plist",
-      "entitlementsInherit": "electron/entitlements.mac.plist"
-    },
-    "win": {
-      "icon": "electron/icon.ico",
-      "target": [
-        "nsis",
-        "msi"
-      ]
-    },
-    "nsis": {
-      "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "output": "dist_electron"
     },
     "publish": [
       {
         "provider": "github",
         "owner": "mmonteiroc",
-        "repo": "EasierBanking"
+        "repo": "EasierBanking",
+        "releaseType": "release"
       }
-    ]
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    }
   }
 }

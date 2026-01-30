@@ -14,21 +14,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Get version from package.json
+      
+      - name: Get version
         id: check
         run: |
           VERSION=$(node -p "require('./package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          
-          # Check if tag exists
           if git rev-parse "v$VERSION" >/dev/null 2>&1; then
-            echo "Version v$VERSION already exists. Skipping release."
             echo "new_version=false" >> $GITHUB_OUTPUT
           else
-            echo "Version v$VERSION is new. Proceeding with release."
             echo "new_version=true" >> $GITHUB_OUTPUT
           fi
 
@@ -54,28 +48,20 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install & Build
-        run: |
-          npm install
-          npm run build
+      - name: Install dependencies
+        run: npm install
 
-      # This creates the tag and the release page first
-      - name: Create GitHub Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: v${{ needs.check-version.outputs.version }}
-          name: Release v${{ needs.check-version.outputs.version }}
-          draft: false
-          prerelease: false
-          generate_release_notes: true # This gives you an automatic changelog!
+      - name: Build Vite application
+        run: npm run build  # This must generate the folder Electron uses (e.g., /dist)
+
+      - name: Build and Publish Electron
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and Publish Electron Assets
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # macOS Signing
+          CSC_LINK: ${{ secrets.CSC_LINK }}
+          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
         run: |
+          # The --publish always flag is mandatory here
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
             npm run electron:build -- --mac --publish always
           else
