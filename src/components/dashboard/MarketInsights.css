@@ -1,0 +1,101 @@
+.market-insights-container {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.insights-header h3 {
+    margin: 0 0 8px 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.insights-header p {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+}
+
+.benchmarking-charts {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+}
+
+.benchmarking-status {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.status-indicator-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+.status-indicator-card.above {
+    border-left: 4px solid var(--danger);
+    background: rgba(239, 68, 68, 0.05);
+}
+
+.status-indicator-card.below {
+    border-left: 4px solid var(--success);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.status-indicator-card.neutral {
+    border-left: 4px solid var(--text-secondary);
+    background: rgba(161, 161, 170, 0.05);
+}
+
+.status-icon svg {
+    width: 32px;
+    height: 32px;
+}
+
+.status-icon svg.critical {
+    color: var(--danger);
+}
+
+.status-icon svg.success {
+    color: var(--success);
+}
+
+.status-icon svg.neutral {
+    color: var(--text-secondary);
+}
+
+.status-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.category-name {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text-primary);
+}
+
+.status-message {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.benchmarking-footer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    padding: 16px;
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}

@@ -1,0 +1,22 @@
+.activity-chart-container {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-chart-container h3 {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.activity-chart-wrapper {
+    flex: 1;
+    min-height: 0;
+}

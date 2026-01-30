@@ -1,0 +1,117 @@
+.rules-modal {
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.add-rule-form {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: var(--radius-md);
+}
+
+.rule-inputs-stacked {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.rule-row {
+    display: flex;
+    gap: 12px;
+}
+
+.rule-options {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-label-sm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.rules-list {
+    flex: 1;
+    overflow-y: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.rule-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rule-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--text-secondary);
+}
+
+.rule-pattern {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.rule-arrow {
+    opacity: 0.5;
+}
+
+.rule-category {
+    color: var(--text-accent);
+    background: rgba(99, 102, 241, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+}
+
+.delete-rule-btn {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.6;
+    transition: all 0.2s;
+}
+
+.delete-rule-btn:hover {
+    opacity: 1;
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.1);
+    border-radius: 4px;
+}
+
+.empty-rules {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 32px;
+    font-style: italic;
+}

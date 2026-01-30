@@ -1,0 +1,178 @@
+.subscription-audit-container {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(249, 115, 22, 0.05));
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    border-radius: 16px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.subscription-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.subscription-header h3 {
+    margin: 0;
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.burn-rate-badge {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(249, 115, 22, 0.2));
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.burn-rate-label {
+    font-size: 0.75rem;
+    color: #fca5a5;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 500;
+}
+
+.burn-rate-value {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #ef4444;
+    margin-top: 4px;
+}
+
+.no-subscriptions {
+    text-align: center;
+    padding: 48px 24px;
+    color: #a1a1aa;
+}
+
+.no-subscriptions p {
+    margin: 8px 0;
+}
+
+.no-subscriptions .hint {
+    font-size: 0.875rem;
+    color: #71717a;
+}
+
+.chart-section {
+    margin-bottom: 32px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.subscription-list {
+    margin-top: 24px;
+}
+
+.subscription-list h4 {
+    color: #e5e7eb;
+    font-size: 1.125rem;
+    margin-bottom: 16px;
+    font-weight: 600;
+}
+
+.subscription-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.subscription-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+.subscription-item:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(239, 68, 68, 0.3);
+    transform: translateX(4px);
+}
+
+.subscription-info {
+    flex: 1;
+}
+
+.subscription-name {
+    color: #fff;
+    font-weight: 500;
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.subscription-meta {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-size: 0.875rem;
+}
+
+.frequency-tag {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.occurrences {
+    color: #a1a1aa;
+}
+
+.last-charged {
+    color: #71717a;
+}
+
+.subscription-cost {
+    text-align: right;
+}
+
+.monthly-cost {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ef4444;
+    margin-bottom: 4px;
+}
+
+.actual-cost {
+    font-size: 0.75rem;
+    color: #a1a1aa;
+}
+
+@media (max-width: 768px) {
+    .subscription-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .burn-rate-badge {
+        width: 100%;
+        align-items: center;
+    }
+
+    .subscription-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .subscription-cost {
+        text-align: left;
+    }
+}

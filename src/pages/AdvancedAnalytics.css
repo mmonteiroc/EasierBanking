@@ -1,0 +1,173 @@
+.advanced-analytics-page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 32px 24px;
+    min-height: 100vh;
+}
+
+.page-header {
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.page-header h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+}
+
+.page-description {
+    font-size: 1.125rem;
+    color: #a1a1aa;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Tab Navigation */
+.analytics-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 32px;
+    padding: 6px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.tab-button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 24px;
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    color: #a1a1aa;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-button::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.tab-button:hover::before {
+    opacity: 1;
+}
+
+.tab-button:hover {
+    color: #e4e4e7;
+    transform: translateY(-2px);
+}
+
+.tab-button.active {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    color: #ffffff;
+    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.3);
+}
+
+.tab-button.active::before {
+    opacity: 0;
+}
+
+.tab-icon {
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-label {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+}
+
+/* Content */
+.analytics-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.subscription-audit-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.section-controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    padding: 0 0 12px 0;
+}
+
+@media (max-width: 768px) {
+    .advanced-analytics-page {
+        padding: 24px 16px;
+    }
+
+    .page-header h1 {
+        font-size: 2rem;
+    }
+
+    .page-description {
+        font-size: 1rem;
+    }
+
+    .analytics-tabs {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .tab-button {
+        flex: 1;
+        justify-content: center;
+        padding: 10px 16px;
+        font-size: 0.9rem;
+    }
+
+    .tab-icon {
+        font-size: 1.1rem;
+    }
+
+    .tab-label {
+        display: none;
+    }
+
+    /* Show label on active tab only on mobile */
+    .tab-button.active .tab-label {
+        display: inline;
+    }
+}
