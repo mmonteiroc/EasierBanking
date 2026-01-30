@@ -36,6 +36,8 @@ jobs:
     needs: check-version
     if: needs.check-version.outputs.new_version == 'true'
     runs-on: ${{ matrix.os }}
+    permissions:
+      contents: write
     strategy:
       matrix:
         os: [windows-latest, macos-latest]
