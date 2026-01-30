@@ -57,13 +57,11 @@ jobs:
       - name: Build and Publish Electron
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # macOS Signing
-          CSC_LINK: ${{ secrets.CSC_LINK }}
-          CSC_KEY_PASSWORD: ${{ secrets.CSC_KEY_PASSWORD }}
+          CSC_IDENTITY_AUTO_DISCOVERY: false # Add this to skip looking for Mac certs
         run: |
-          # The --publish always flag is mandatory here
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            npm run electron:build -- --mac --publish always
+            # Use -c.mac.identity=null as an extra safety measure
+            npm run electron:build -- --mac --publish always -c.mac.identity=null
           else
             npm run electron:build -- --win --publish always
           fi

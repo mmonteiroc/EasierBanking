@@ -64,9 +64,13 @@
       ]
     },
     "mac": {
+      "category": "public.app-category.finance",
       "target": [
-        "dmg"
-      ]
+        "dmg",
+        "zip"
+      ],
+      "identity": null,
+      "hardenedRuntime": false
     }
   }
 }
