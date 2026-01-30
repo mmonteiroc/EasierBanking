@@ -1,6 +1,7 @@
 import React, { type ReactNode, useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { TrendingUp, User, LogOut, Trash2, Upload, Settings } from 'lucide-react';
+import { UpdateNotifier } from '../common/UpdateNotifier';
 import './Layout.css';
 
 interface LayoutProps {
@@ -165,6 +166,7 @@ export const Layout: React.FC<LayoutProps> = ({
             <main className="app-main">
                 {children}
             </main>
+            <UpdateNotifier />
         </div>
     );
 };

@@ -1,0 +1,134 @@
+.update-notifier {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    min-width: 320px;
+    max-width: 400px;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(30, 41, 59, 0.95);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+    animation: slide-in 0.3s ease-out;
+    color: white;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.update-notifier.downloaded {
+    border-left: 4px solid #10b981;
+    /* Success green */
+}
+
+.update-notifier.available {
+    border-left: 4px solid #3b82f6;
+    /* Info blue */
+}
+
+.update-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.update-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    flex-shrink: 0;
+}
+
+.update-notifier.downloaded .update-icon {
+    color: #10b981;
+}
+
+.update-notifier.available .update-icon {
+    color: #3b82f6;
+}
+
+.update-text {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.update-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.update-description {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+.update-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.update-button.primary {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.update-button.primary:hover {
+    background: #2563eb;
+    transform: translateY(-1px);
+}
+
+.update-button-close {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.update-button-close:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 3s linear infinite;
+}

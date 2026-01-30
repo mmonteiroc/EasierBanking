@@ -69,10 +69,17 @@ jobs:
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
           APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
         run: |
+          # Clear empty secrets to prevent electron-builder from getting confused
+          [ -z "$CSC_LINK" ] && unset CSC_LINK
+          [ -z "$CSC_KEY_PASSWORD" ] && unset CSC_KEY_PASSWORD
+          [ -z "$APPLE_ID" ] && unset APPLE_ID
+          [ -z "$APPLE_ID_PASSWORD" ] && unset APPLE_ID_PASSWORD
+          [ -z "$APPLE_TEAM_ID" ] && unset APPLE_TEAM_ID
+          
           if [ "${{ matrix.os }}" = "macos-latest" ]; then
-            npm run electron:build -- -m -p always
+            npm run electron:build -- --mac --publish always
           else
-            npm run electron:build -- -w -p always
+            npm run electron:build -- --win --publish always
           fi
         shell: bash
 

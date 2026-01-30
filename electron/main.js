@@ -1,14 +1,19 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import pkg from 'electron-updater';
+const { autoUpdater } = pkg;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+let mainWindow;
+
 function createWindow() {
-    const win = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         width: 1200,
         height: 800,
+        backgroundColor: '#0f172a', // Matches our dark theme
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
@@ -19,12 +24,34 @@ function createWindow() {
     const isDev = process.env.NODE_ENV === 'development';
 
     if (isDev) {
-        win.loadURL('http://localhost:5173');
-        // win.webContents.openDevTools();
+        mainWindow.loadURL('http://localhost:5173');
     } else {
-        win.loadFile(path.join(__dirname, '../dist/index.html'));
+        mainWindow.loadFile(path.join(__dirname, '../dist/index.html'));
+    }
+
+    // Auto-update configuration
+    if (!isDev) {
+        autoUpdater.checkForUpdatesAndNotify();
     }
 }
+
+// Auto-updater events
+autoUpdater.on('update-available', (info) => {
+    mainWindow?.webContents.send('update-available', info);
+});
+
+autoUpdater.on('update-downloaded', (info) => {
+    mainWindow?.webContents.send('update-downloaded', info);
+});
+
+// IPC handlers
+ipcMain.handle('get-app-version', () => {
+    return app.getVersion();
+});
+
+ipcMain.on('install-update', () => {
+    autoUpdater.quitAndInstall();
+});
 
 app.whenReady().then(() => {
     createWindow();
