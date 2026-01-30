@@ -88,6 +88,8 @@ jobs:
   create-release-and-tag:
     needs: [check-version, build-and-release]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
